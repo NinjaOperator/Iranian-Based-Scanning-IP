@@ -1,0 +1,32 @@
+On 12/15/20 Bad Packets reported that that Iranian based IP 158[.]58.185[.]55 (ASN	57497 FARASOSAMANEHPASARGAD, IR) 
+has been aggressively scanning Fortinet VPN servers vulnerable to unauthenticated arbitrary file read 
+CVE-2018-13379) leading to disclosure of usernames and passwords in plaintext.
+
+Since this CVE may be a concern to various orgs I decided to take a deeper dive and provide additional context.
+
+Pivoted into GreyNoise first. And extracted the following data. 
+First Seen: 2019-05-02 Last Seen: 2020-12-10 
+ OS: Linux 2.2.x-3.x (Embedded) os:"Linux 2.2.x-3.x (Embedded)
+ The IP has been observed scanning for openings over port 10443.
+ In addition the actor has been observed utlizing NMAP in order to scan for open ports. 
+ 
+ I then searched the IP in BinaryEdge and pulled the following data.
+ Source Ports 21, 53, 80, 135, 443
+ 
+ Events by port 443
+ jarm - JARM Fingerprint
+ JARM Hash	26d26d16d26d26d22c26d26d26d26dfd9c9d14e4f4f67f94f0359f8b28f532
+ 
+ For the readers of this report who are not familar with Jarm Hashing.
+ I've included the link to the SalesForce/JARM Team Github page and their report on Medium. 
+ Where they do an great job explaining what JARM is and why it's important.
+ Credit their team for creating this project!
+ https://github.com/salesforce/jarm
+ https://engineering.salesforce.com/easily-identify-malicious-servers-on-the-internet-with-jarm-e095edac525a
+ 
+ Finally my advise to the frontline IR/SOC analyst is to review your Inbound Scannning Dashboards in your SIEMs. 
+ And report and scanning activity from this IP regardless if the traffic was successful or not. 
+ 
+ References: 
+ https://viz.greynoise.io/ip/158.58.185.55
+ https://app.binaryedge.io/services/query/158.58.185.55
